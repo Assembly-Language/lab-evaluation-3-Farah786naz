@@ -3,24 +3,31 @@
 INCLUDE Irvine32.inc
 .data
 ;public asmfunc
-msg db "assebly procedure end now",0
+msg db "sum of all odd numbers is:",0
 
 
 .code
-asmfunc PROC p1:DWORD, p2:DWORD
+asmfunc PROC arr:DWORD, p2:DWORD  
     
-    push ebp
-    mov ebp,esp
-    mov eax, [ebp+12
-\] ; Move the first parameter into EAX
-    call writedec
-    call crlf
-    ;add eax, p2 ; Add the second parameter to EAX
-    call writedec
-    call crlf
-    mov edx, offset msg
-    call writestring
-    call crlf
+    mov eax,0
+    mov ebx,0
+    mov ecx,p2        ;size of array
+    mov esi, arr       ;move the first index of array
+    
+    next:
+        mov ax,[esi]
+         test ax,1
+         jz movetonext                            ;if there is even value then move to next
+
+         add bx,ax                                ;sum the odd the value if found  
+        
+        movetonext:
+                   add esi,TYPE arr               ;here we are moving to the next index bcz value was even
+                   loop next
+
+                 movzx eax,bx                      ;RETURN VALUE TO C FILE
+
+        call crlf
     
     ret
 asmfunc ENDP

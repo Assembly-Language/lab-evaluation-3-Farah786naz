@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-void __stdcall asmfunc(int p1 ,int p2);
+int __stdcall asmfunc(int arr[],int size);
 
 #ifdef __cplusplus
 }
@@ -17,16 +17,17 @@ void __stdcall asmfunc(int p1 ,int p2);
 
 int main() {
     system("cls");
-    int abc;
+    int arr[5]={1,3,2,4,7};
+    int value = 0;
     printf("assembly proc calling from  from C! \n");
 getch();
 
     
-    asmfunc(3,5); //assembly proc calling
+    value = asmfunc(arr,5); //assembly proc calling
    
    getch();
     
-    
+    printf("The answer is:%d \n",value);
     printf("back to  C! \n"); // printing in c
     
   
